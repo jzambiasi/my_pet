@@ -9,19 +9,23 @@ class Auth extends BaseController
 {
     public function index()
     {
-        helper('form');
+        /*       
+            if(session()->has('isLoggedIn')){
+                return redirect()->to('/dashboard');
+            } 
+        */
         echo view('login');
     }
 
     public function authenticate(){
         $userModel = new UserModel();
-
+       
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
    
         $user = $userModel->getUser($email);
-     
-        if($user && ($senha == $user['password'])){
+       
+        if($user && ($senha == $user->password)){
             session()->set('isLoggedIn', true);
             return redirect()->to('/dashboard');
         }else{

@@ -11,4 +11,4 @@ $routes->post('authenticate', 'Auth::authenticate');
 $routes->get('logout', 'Auth::logout');
 
 
-$routes->get('dashboard', 'Home::index');
+$routes->get('dashboard', 'Home::index', ['filter'=>'auth']);
