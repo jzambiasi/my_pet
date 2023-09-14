@@ -8,9 +8,13 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table            = 'users';
-    protected $allowedFields    = ['email', 'senha'];
+    protected $allowedFields    = ['email', 'password'];
     protected $returnType = User::class;
 
+    protected $validationRules = [
+        'email' => 'required|valid_email|is_unique[users.email]',
+        'password' => 'required|min_length[6]',
+    ];
 
     public function getUser($email){
       

@@ -2,6 +2,10 @@
     <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
 <?php endif;?>
 
+<?php if(session()->getFlashdata('success')): ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php endif;?>
+
 
 <form action="/authenticate" method="post">
     <div class="form-group">
