@@ -8,7 +8,7 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table            = 'users';
-    protected $allowedFields    = ['email', 'password'];
+    protected $allowedFields    = ['email', 'password', 'created_at'];
     protected $returnType = User::class;
 
     protected $validationRules = [

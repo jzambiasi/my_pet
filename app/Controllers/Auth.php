@@ -32,9 +32,19 @@ class Auth extends BaseController
         $senha = $this->request->getPost('senha');
    
         $user = $this->_userModel->getUser($email);
+
        
         if($user && password_verify($senha, $user->password)){
-            session()->set('isLoggedIn', true);
+           
+
+            $variavalDeSessao = [
+                'email' => $user->email,
+                'data_login' => bd2br(date('Y-m-d')),
+                'data_cad' => $user->created_at,
+                'isLoggedIn' => true,
+            ];
+
+            session()->set($variavalDeSessao);
             return redirect()->to('/dashboard');
         }else{
             session()->setFlashdata('error', 'Usuário inválido');
