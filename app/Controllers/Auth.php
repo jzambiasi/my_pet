@@ -4,16 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Entities\User;
-use App\Models\UserModel;
+use App\Services\UserService;
+use CodeIgniter\Config\Factories;
 
 class Auth extends BaseController
 {
 
-    private $_userModel;
+    private $userService;
 
     public function __construct()
     {
-        $this->_userModel = new UserModel();
+        $this->userService = Factories::class(UserService::class);
     }
 
     public function index()
@@ -30,45 +31,14 @@ class Auth extends BaseController
        
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
-   
-        $user = $this->_userModel->getUser($email);
+        
+        return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
 
-       
-        if($user && password_verify($senha, $user->password)){
-           
-
-            $variavalDeSessao = [
-                'email' => $user->email,
-                'data_login' => bd2br(date('Y-m-d')),
-                'data_cad' => $user->created_at,
-                'isLoggedIn' => true,
-            ];
-
-            session()->set($variavalDeSessao);
-            return redirect()->to('/dashboard');
-        }else{
-            session()->setFlashdata('error', 'Usuário inválido');
-            return redirect()->back();
-        }
     }
 
     public function createUser(){
 
-        // dados do formulário via POST
-        $email = $this->request->getPost('email');
-        $password =  $this->request->getPost('password');
-        
-        $user = new User();
-       
-        $user->email = $email;
-        $user->password = $password;
-    
-        if($this->_userModel->save($user)){
-            session()->setFlashdata('success', 'Login criado com sucesso');
-            return redirect()->to('/');
-        }else{
-            return redirect()->back()->withInput()->with('errors', $this->_userModel->errors()); 
-        }
+
 
     }
 
