@@ -37,11 +37,10 @@ class Auth extends BaseController
     }
 
     public function createUser(){
-        // furta que partiu
+
+        // falta fazer a atualizacao desse metodo
 
 
-
-        
 
     }
 
