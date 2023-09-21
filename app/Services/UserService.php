@@ -27,12 +27,12 @@ class UserService{
                 'data_cad' => $user->created_at,
                 'isLoggedIn' => true,
             ];
-      
+            session()->setFlashdata('error', lang('App.successLogin'));
             session()->set($variavalDeSessao);
            
             return true;
         }else{
-            session()->setFlashdata('error', 'Usuário inválido');
+            session()->setFlashdata('error', lang('App.errorLogin'));
             return false;
         }
     }
@@ -45,7 +45,7 @@ class UserService{
         $user->password = $password;
     
         if($this->userModel->save($user)){
-            session()->setFlashdata('success', 'Login criado com sucesso');
+            session()->setFlashdata('success', lang('App.successCreateLogin'));
             return redirect()->to('/');
         }else{
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
