@@ -7,6 +7,6 @@ return [
     'errorLogin' => 'User not found',
     'successLogin' => 'Login Efetuado com sucesso!', 
     'successCreateLogin' => 'Usuário inválido', 
-
+    'welcome' => 'Welcome', 
 
 ];
