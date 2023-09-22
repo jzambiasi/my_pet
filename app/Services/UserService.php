@@ -26,10 +26,11 @@ class UserService{
                 'data_login' => bd2br(date('Y-m-d')),
                 'data_cad' => $user->created_at,
                 'isLoggedIn' => true,
+                'user_locale' => getPreferredLanguage(['en', 'pt-BR'], session('user_locale')),
             ];
-            session()->setFlashdata('error', lang('App.successLogin'));
+            
             session()->set($variavalDeSessao);
-           
+            session()->setFlashdata('success', lang('App.successLogin', [], session('user_locale')));
             return true;
         }else{
             session()->setFlashdata('error', lang('App.errorLogin'));
