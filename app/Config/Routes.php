@@ -15,3 +15,6 @@ $routes->post('createUser', 'Auth::createUser');
 
 
 $routes->get('dashboard', 'Home::index', ['filter'=>'auth']);
+
+
+$routes->get('language/{locale}', 'LanguageController::setLanguage');

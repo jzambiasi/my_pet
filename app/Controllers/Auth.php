@@ -48,6 +48,7 @@ class Auth extends BaseController
         }
     }
 
+<<<<<<< HEAD
     public function createUser()
     {
         if ($this->request->getMethod() === 'post') {
@@ -70,6 +71,11 @@ class Auth extends BaseController
                     // Adiciona mensagens de log para depuração
                     log_message('debug', 'Email recebido: ' . $email);
                     log_message('debug', 'Senha recebida: ' . $password);
+=======
+    public function createUser(){
+        // falta fazer a atualizacao desse metodo
+    }
+>>>>>>> 6b2d8ab6b21b0c5faca4483b828ebe75a90afff6
 
                     if ($this->userService->createUser($email, $hashedPassword)) {
                         return redirect()->to('/dashboard');

@@ -26,13 +26,14 @@ class UserService{
                 'data_login' => bd2br(date('Y-m-d')),
                 'data_cad' => $user->created_at,
                 'isLoggedIn' => true,
+                'user_locale' => getPreferredLanguage(['en', 'pt-BR'], session('user_locale')),
             ];
-      
+            
             session()->set($variavalDeSessao);
-           
+            session()->setFlashdata('success', lang('App.successLogin', [], session('user_locale')));
             return true;
         }else{
-            session()->setFlashdata('error', 'Usuário inválido');
+            session()->setFlashdata('error', lang('App.errorLogin'));
             return false;
         }
     }
@@ -45,7 +46,7 @@ class UserService{
         $user->password = $password;
     
         if($this->userModel->save($user)){
-            session()->setFlashdata('success', 'Login criado com sucesso');
+            session()->setFlashdata('success', lang('App.successCreateLogin'));
             return redirect()->to('/');
         }else{
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
