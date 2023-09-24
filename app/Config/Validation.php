@@ -37,7 +37,10 @@ class Validation extends BaseConfig
         'list'   => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
-
+    public $register = [
+        'email' => 'required|valid_email',
+        'password' => 'required|min_length[6]',
+    ];
     // --------------------------------------------------------------------
     // Rules
     // --------------------------------------------------------------------

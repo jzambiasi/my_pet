@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Services;
 
-use App\Entities\User;
 use App\Models\UserModel;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 class UserService
 {
@@ -12,29 +13,43 @@ class UserService
     {
         $this->userModel = $userModel;
     }
+
     public function authenticate($email, $senha)
     {
-        $user = $this->userModel->getUser($email);
+        $user = $this->userModel->where('email', $email)->first();
 
-        if ($user && password_verify($senha, $user->password)) {
-            return $user; // Retorna o usuário autenticado
+        if ($user && password_verify($senha, $user['password'])) {
+            // Autenticação bem-sucedida, você pode retornar o usuário autenticado aqui se desejar
+            return true;
         } else {
-            throw new \Exception('Falha na autenticação'); // Lança uma exceção em caso de falha
+            return false;
         }
     }
 
     public function createUser($email, $password)
     {
-        $user = new User();
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $user->email = $email;
-        $user->password = $password;
+        $data = [
+            'email' => $email,
+            'password' => $hashedPassword,
+        ];
 
-        if ($this->userModel->save($user)) {
-            return true; // Retorna true em caso de sucesso
-        } else {
-            return false; // Retorna false em caso de falha
+        try {
+            // Tente inserir o usuário
+            $result = $this->userModel->insert($data);
+        
+            if ($result) {
+                // Registro bem-sucedido
+                return true;
+            } else {
+                // Erro ao inserir no banco de dados
+                return false;
+            }
+        } catch (\Exception $e) {
+            // Captura a exceção e registra-a para depuração
+            log_message('error', 'Exceção durante a inserção do usuário: ' . $e->getMessage());
+            return false;
         }
     }
 }
-?>

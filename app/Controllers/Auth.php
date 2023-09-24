@@ -1,26 +1,30 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Services\UserService;
-use CodeIgniter\Debug\Toolbar\Collectors\Log as LogCollector;
 
 class Auth extends BaseController
 {
     private $userService;
 
-    public function __construct(UserService $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
+        // Injeção de dependência será feita automaticamente pelo CodeIgniter
+        $this->userService = service('user_service');
     }
+
     public function index()
     {
-        echo view('login');
+        // Página de login
+        return view('blog');
     }
 
     public function register()
     {
-        echo view('register');
+        // Página de registro
+        return view('register');
     }
 
     public function authenticate()
@@ -28,64 +32,57 @@ class Auth extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        // Adiciona mensagens de log para depuração
-        log_message('debug', 'Email recebido: ' . $email);
-        log_message('debug', 'Senha recebida: ' . $password);
-
-        // Verifica se o email e a senha são strings válidas
-        if (!is_string($email) || !is_string($password)) {
-            log_message('debug', 'Dados de email ou senha inválidos.');
-            return redirect()->back()->with('error', 'Dados inválidos');
-        }
-
+        // Verificar autenticação
         if ($this->userService->authenticate($email, $password)) {
+            // Autenticado com sucesso, redirecionar para a área restrita
             return redirect()->to('/dashboard');
+        } else {
+            // Falha na autenticação, redirecionar de volta ao login com mensagem de erro
+            return redirect()->to('/login')->with('error', 'Usuário inválido');
         }
+    }
 
-        log_message('debug', 'Autenticação falhou.');
-        return redirect()->back()->with('error', 'Usuário inválido');
+    public function showRegisterForm()
+    {
+        // Página de registro
+        return view('register');
     }
 
     public function createUser()
     {
         if ($this->request->getMethod() === 'post') {
             $validation = \Config\Services::validation();
-
-            $validation->setRules([
-                'email'    => 'required|valid_email',
-                'password' => 'required|min_length[6]'
-            ]);
-
-            if ($validation->withRequest($this->request)->run()) {
-                $email    = $this->request->getPost('email');
+    
+            // Valide os dados do formulário
+            if ($validation->run($this->request->getPost(), 'register')) {
+                // Se a validação passar, continue com o processo de registro
+                $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
-
-                // Verifica se a senha é uma string válida
-                if (!is_string($password)) {
-                    log_message('debug', 'Senha inválida.');
-                    return redirect()->back()->with('error', 'Senha inválida');
-                }
-
-                // Hash da senha
-                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-                // Adiciona mensagens de log para depuração
-                log_message('debug', 'Email recebido: ' . $email);
-                log_message('debug', 'Senha recebida: ' . $password);
-
-                // Falta fazer a atualização deste trecho
-                if ($this->userService->createUser($email, $hashedPassword)) {
-                    return redirect()->to('/dashboard');
+    
+                // Chame o método createUser com os dois argumentos
+                $result = $this->userService->createUser($email, $password);
+    
+                if ($result) {
+                    // Registro bem-sucedido, redirecionar para a página de login com mensagem de sucesso
+                    return redirect()->to('blog')->with('success', 'Usuário registrado com sucesso!');
                 } else {
-                    log_message('debug', 'Erro ao criar o usuário.');
-                    return redirect()->back()->with('error', 'Erro ao criar o usuário.');
+                    // Erro ao inserir no banco de dados, redirecionar para a página de registro com mensagem de erro
+                    return redirect()->to('/register')->with('error', 'Erro ao registrar usuário.');
                 }
             } else {
-                log_message('debug', 'Dados do formulário não são válidos.');
-                return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+                // Dados do formulário não são válidos, crie uma mensagem de erro única
+                $errors = [];
+                foreach ($validation->getErrors() as $field => $error) {
+                    $errors[] = $error;
+                }
+                $error_message = implode('<br>', $errors);
+    
+                // Redirecione para a página de registro com erros de validação
+                return redirect()->to('/register')->withInput()->with('errors', $error_message);
             }
         } else {
-            return redirect()->to('register');
+            // Se não for uma solicitação POST, redirecione para a página de registro
+            return redirect()->to('/register');
         }
     }
-}
+}    
