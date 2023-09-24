@@ -3,6 +3,8 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseService;
+use App\Services\UserService;
+use App\Models\UserModel;
 
 /**
  * Services Configuration file.
@@ -17,16 +19,26 @@ use CodeIgniter\Config\BaseService;
  * method format you should use for your service methods. For more examples,
  * see the core Services file at system/Config/Services.php.
  */
-class Services extends BaseService
+class Services extends \CodeIgniter\Config\Services
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+    public static function user_service($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('user_service');
+        }
+
+        return new UserService(new UserModel());
+    }
+
+    public static function auth($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('auth');
+        }
+    
+        // Configure a injeção de dependência aqui
+        $userService = new UserService(new UserModel());
+    
+        return new \App\Controllers\Auth($userService);
+    }
 }

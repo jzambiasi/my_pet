@@ -1,57 +1,40 @@
 <?php
-
 namespace App\Services;
 
 use App\Entities\User;
 use App\Models\UserModel;
-use CodeIgniter\Config\Factories;
 
-class UserService{
-
+class UserService
+{
     protected $userModel;
 
-    public function __construct()
+    public function __construct(UserModel $userModel)
     {
-        $this->userModel = Factories::models(UserModel::class);
+        $this->userModel = $userModel;
     }
-
-    public function authenticate($email, $senha){
-
+    public function authenticate($email, $senha)
+    {
         $user = $this->userModel->getUser($email);
-       
-        if($user && password_verify($senha, $user->password)){
-           
-            $variavalDeSessao = [
-                'email' => $user->email,
-                'data_login' => bd2br(date('Y-m-d')),
-                'data_cad' => $user->created_at,
-                'isLoggedIn' => true,
-                'user_locale' => getPreferredLanguage(['en', 'pt-BR'], session('user_locale')),
-            ];
-            
-            session()->set($variavalDeSessao);
-            session()->setFlashdata('success', lang('App.successLogin', [], session('user_locale')));
-            return true;
-        }else{
-            session()->setFlashdata('error', lang('App.errorLogin'));
-            return false;
+
+        if ($user && password_verify($senha, $user->password)) {
+            return $user; // Retorna o usuário autenticado
+        } else {
+            throw new \Exception('Falha na autenticação'); // Lança uma exceção em caso de falha
         }
     }
 
-    public function createUser($email, $password){
-
+    public function createUser($email, $password)
+    {
         $user = new User();
-       
+
         $user->email = $email;
         $user->password = $password;
-    
-        if($this->userModel->save($user)){
-            session()->setFlashdata('success', lang('App.successCreateLogin'));
-            return redirect()->to('/');
-        }else{
-            return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
+
+        if ($this->userModel->save($user)) {
+            return true; // Retorna true em caso de sucesso
+        } else {
+            return false; // Retorna false em caso de falha
         }
-
     }
-
 }
+?>
