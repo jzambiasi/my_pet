@@ -14,6 +14,8 @@ $routes->post('autenticar', 'Auth::autenticar'); // Rota para autenticar (deve s
 $routes->post('criarUsuario', 'Auth::criarUsuario'); // Rota para criar usuário (deve ser POST)
 $routes->get('register', 'Auth::showRegisterForm');
 $routes->post('createUser', 'Auth::createUser');
+$routes->get('blog', 'BlogController::index');
+$routes->get('criarpost.php', 'CriarPostController::index');
 
 // Rota protegida por autenticação
 $routes->get('painel', 'Home::index', ['filter' => 'auth']);
