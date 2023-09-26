@@ -7,7 +7,7 @@
 <?php endif;?>
 
 
-<form action="/authenticate" method="post">
+<form action="Controllers/Auth" method="post">
     <div class="form-group">
         <label>Username</label>
         <input type="text" name="email" class="form-control" required>

@@ -52,19 +52,19 @@ class Auth extends BaseController
     {
         if ($this->request->getMethod() === 'post') {
             $validation = \Config\Services::validation();
-    
+
             // Valide os dados do formulário
             if ($validation->run($this->request->getPost(), 'register')) {
                 // Se a validação passar, continue com o processo de registro
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
-    
+
                 // Chame o método createUser com os dois argumentos
                 $result = $this->userService->createUser($email, $password);
-    
+
                 if ($result) {
                     // Registro bem-sucedido, redirecionar para a página de login com mensagem de sucesso
-                    return redirect()->to('blog')->with('success', 'Usuário registrado com sucesso!');
+                    return redirect()->to('/login')->with('success', 'Usuário registrado com sucesso!');
                 } else {
                     // Erro ao inserir no banco de dados, redirecionar para a página de registro com mensagem de erro
                     return redirect()->to('/register')->with('error', 'Erro ao registrar usuário.');
@@ -76,7 +76,7 @@ class Auth extends BaseController
                     $errors[] = $error;
                 }
                 $error_message = implode('<br>', $errors);
-    
+
                 // Redirecione para a página de registro com erros de validação
                 return redirect()->to('/register')->withInput()->with('errors', $error_message);
             }
@@ -85,4 +85,4 @@ class Auth extends BaseController
             return redirect()->to('/register');
         }
     }
-}    
+}

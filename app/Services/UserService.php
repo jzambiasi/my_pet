@@ -18,7 +18,7 @@ class UserService
     {
         $user = $this->userModel->where('email', $email)->first();
 
-        if ($user && password_verify($senha, $user['password'])) {
+        if ($user && !empty($user->password) && password_verify($senha, $user->password)) {
             // Autenticação bem-sucedida, você pode retornar o usuário autenticado aqui se desejar
             return true;
         } else {
@@ -38,7 +38,7 @@ class UserService
         try {
             // Tente inserir o usuário
             $result = $this->userModel->insert($data);
-        
+
             if ($result) {
                 // Registro bem-sucedido
                 return true;
