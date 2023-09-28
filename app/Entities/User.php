@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 
-class AuthController extends BaseController
+class UserAuthController extends BaseController
 {
     private $userModel;
 
