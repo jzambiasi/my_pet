@@ -13,8 +13,9 @@
         </div>
     <?php endforeach; ?>
 
-    <!-- Botão/link para a página de criação de postagens -->
-    <a href="criarpost.php"><button>Criar Post</button></a>
+    <form action="criarpost.php" method="post">
+    <button type="submit">Enviar</button>
+   
 
     <h3 style="font-size: 20px">
         <span>Ter um animal de estimação pode trazer inúmeros benefícios

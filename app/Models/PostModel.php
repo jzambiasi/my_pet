@@ -8,7 +8,6 @@ class PostModel extends Model
 {
     protected $table = 'posts'; // Nome da tabela no banco de dados
     protected $primaryKey = 'id'; // Nome da chave primária
-
     protected $allowedFields = ['title', 'content']; // Campos permitidos para inserção/atualização
 
     public function getAllPosts()

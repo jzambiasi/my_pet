@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             ],
             'created_at' => [
                 'type' => 'timestamp',
-                'null' => null,
+                'null' => true,
             ],
             'deleted_at' => [
                 'type' => 'DATETIME',
@@ -44,31 +44,35 @@ class CreatePostsTable extends Migration
 class User extends Migration
 {
     public function up()
-    {
-        $this->forge->addField([
-            'id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
-            'email' => [
-                'type' => 'VARCHAR',
-                'constraint' => '100',
-            ],
-            'password' => [
-                'type' => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'created_at' => [
-                'type' => 'timestamp',
-                'null' => null,
-            ]
-        ]);
-
-        $this->forge->addKey('id', true);
-        $this->forge->createTable('users');
-    }
+{
+    $this->forge->addField([
+        'id' => [
+            'type' => 'INT',
+            'constraint' => 11,
+            'unsigned' => true,
+            'auto_increment' => true,
+        ],
+        'title' => [
+            'type' => 'VARCHAR',
+            'constraint' => '255',
+            'null' => true, // Permitir valores nulos
+        ],
+        'content' => [
+            'type' => 'TEXT',
+        ],
+        'created_at' => [
+            'type' => 'timestamp',
+            'null' => true,
+        ],
+        'deleted_at' => [
+            'type' => 'DATETIME',
+            'null' => true,
+        ],
+    ]);
+    
+    $this->forge->addKey('id', true);
+    $this->forge->createTable('posts');
+}
 
     public function down()
     {

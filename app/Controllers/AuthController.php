@@ -2,10 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use App\Services\UserService;
+use CodeIgniter\Controller;
 
-class Auth extends BaseController
+class AuthController extends Controller
 {
     private $userService;
 
