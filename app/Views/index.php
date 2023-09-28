@@ -12,7 +12,7 @@
 
     <?php if (!session()->get('user_id')) : ?>
         <!-- Formulário de login -->
-        <form action="<?= site_url('auth/authenticate'); ?>" method="post">
+        <form method="POST" action="<?= site_url('blog'); ?>">
             <label for="email">Email:</label>
             <input type="text" name="email" id="email" required>
             <br>
@@ -22,7 +22,7 @@
             <button type="submit">Entrar</button>
         </form>
         <!-- Link para a página de registro -->
-        <p>Não tem uma conta? <a href="<?= site_url('auth/register'); ?>">Registre-se</a></p>
+        <p>Não tem uma conta? <a href="<?= site_url('register'); ?>">Registre-se</a></p>
     <?php endif; ?>
 
     <?php foreach ($posts as $post) : ?>

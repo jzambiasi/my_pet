@@ -2,15 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\PostModel;
+
 class BlogController extends BaseController
 {
     public function index()
     {
-        // Aqui você pode adicionar a lógica para exibir a página inicial do blog
-        // Pode carregar modelos, buscar dados do banco de dados e passá-los para a visualização
+        $postModel = new PostModel();
+        $data['posts'] = $postModel->findAll();
 
-        // Exemplo de carregamento de visualização (substitua com sua lógica)
-        return view('blog'); // Suponhamos que você tenha uma visualização em 'app/Views/blog/index.php'
+        return view('blog', $data);
     }
 
     public function viewPost($postId)
@@ -19,7 +20,6 @@ class BlogController extends BaseController
         // $postId é um parâmetro da URL que permite identificar a postagem a ser exibida
 
         // Exemplo de carregamento de visualização (substitua com sua lógica)
-        return view('blog', ['postId' => $postId]); // Suponhamos que você tenha uma visualização em 'app/Views/blog/view_post.php'
+        return view('blog/view_post', ['postId' => $postId]);
     }
 }
-

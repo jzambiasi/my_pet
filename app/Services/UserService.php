@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\UserModel;
-use CodeIgniter\HTTP\Exceptions\HTTPException;
 
 class UserService
 {
@@ -51,5 +50,13 @@ class UserService
             log_message('error', 'Exceção durante a inserção do usuário: ' . $e->getMessage());
             return false;
         }
+    }
+
+    // Novo método para buscar um usuário pelo email
+    public function getUserByEmail($email)
+    {
+        $user = $this->userModel->select('password')->where('email', $email)->first();
+    
+        return $user ? $user->password : null;
     }
 }

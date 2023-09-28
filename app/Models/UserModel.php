@@ -22,11 +22,11 @@ class UserModel extends Model
         return $this->where('email', $email)->first();
     }
 
-    public function createUser($email,$Password,$hashedPassword)
+    public function createUser($email, $hashedPassword)
     {
         $data = [
             'email' => $email,
-            'password' => $Password
+            'password' => $hashedPassword
         ];
 
         return $this->insert($data);

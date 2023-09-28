@@ -18,7 +18,7 @@ class Auth extends BaseController
     public function index()
     {
         // Página de login
-        return view('blog');
+        return view('login');
     }
 
     public function register()
@@ -32,13 +32,17 @@ class Auth extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        // Verificar autenticação
-        if ($this->userService->authenticate($email, $password)) {
-            // Autenticado com sucesso, redirecionar para a área restrita
-            return redirect()->to('/dashboard');
+        // Consulte o banco de dados para obter o usuário pelo email
+        $user = $this->userService->getUserByEmail($email);
+
+        if ($user && password_verify($password, $user->password)) {
+            // Credenciais corretas, redirecionar para a página principal
+            $_SESSION['loggedin'] = true;
+            return redirect()->to('/blog'); // Redirecionar para a página principal
         } else {
-            // Falha na autenticação, redirecionar de volta ao login com mensagem de erro
-            return redirect()->to('/login')->with('error', 'Usuário inválido');
+            // Credenciais incorretas, exibir mensagem de erro
+            $erro = 'Usuário ou senha incorretos.';
+            return view('login', ['erro' => $erro]);
         }
     }
 
@@ -71,14 +75,10 @@ class Auth extends BaseController
                 }
             } else {
                 // Dados do formulário não são válidos, crie uma mensagem de erro única
-                $errors = [];
-                foreach ($validation->getErrors() as $field => $error) {
-                    $errors[] = $error;
-                }
-                $error_message = implode('<br>', $errors);
+                $errors = implode('<br>', $validation->getErrors());
 
                 // Redirecione para a página de registro com erros de validação
-                return redirect()->to('/register')->withInput()->with('errors', $error_message);
+                return redirect()->to('/register')->withInput()->with('errors', $errors);
             }
         } else {
             // Se não for uma solicitação POST, redirecione para a página de registro
