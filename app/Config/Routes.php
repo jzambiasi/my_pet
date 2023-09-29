@@ -5,19 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-
+$routes->get('register', 'AuthController::showRegistrationForm');
 $routes->get('login', 'AuthController::index'); // Rota para a página de login
 $routes->post('login', 'AuthController::authenticate'); // Rota para autenticar (deve ser POST)
-$routes->post('register', 'AuthController::createUser'); // Rota para criar usuário (deve ser POST)
+ // Rota para criar usuário (deve ser POST)
 
-$routes->get('auth/index', 'AuthController::index'); // Rota para a página de login (caso você ainda precise dela)
 $routes->get('sair', 'AuthController::sair'); // Rota para sair
 $routes->get('criar', 'AuthController::criar'); // Rota para criar algo (ajuste conforme necessário)
-$routes->post('auth/authenticate', 'AuthController::authenticate'); // Rota para autenticar (deve ser POST)
-$routes->post('auth/createUser', 'AuthController::createUser'); // Rota para criar usuário (deve ser POST)
 
 // Rota corrigida para a página de registro
-$routes->match(['get', 'post'], 'register', 'AuthController::register');
+
+$routes->post('register', 'AuthController::createUser');
 
 // Restante das rotas
 $routes->post('blog', 'BlogController::createPost'); // Rota POST para criar um post no blog

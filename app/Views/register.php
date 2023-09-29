@@ -1,21 +1,31 @@
-<!-- register.php -->
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Registro de Usuário</title>
 </head>
 <body>
-    <!-- Se houver mensagens de erro, exibi-las aqui -->
-    <?php if (session('errors')) : ?>
+    <h1>Registro de Usuário</h1>
+    
+    <!-- Exibir mensagens de erro, se houver -->
+    <?php if (isset($error)): ?>
         <div class="alert alert-danger">
-            <?= session('errors') ?>
+            <?= esc($error) ?>
+        </div>
+    <?php endif; ?>
+ 
+    <?php if (isset($success)): ?>
+        <div class="alert alert-success">
+            <?= esc($success) ?>
         </div>
     <?php endif; ?>
 
-    <h1>Registro de Usuário</h1>
     <form method="post" action="/register">
-        <!-- Seu formulário de registro aqui -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required><br>
+        <input type="submit" value="Registrar">
     </form>
 </body>
 </html>

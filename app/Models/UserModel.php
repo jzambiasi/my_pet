@@ -21,7 +21,7 @@ class UserModel extends Model
     {
         return $this->where('email', $email)->first();
     }
-
+    
     public function createUser($email, $hashedPassword)
     {
         $data = [

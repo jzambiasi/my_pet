@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
     }
 
-    public function showRegisterForm()
+    public function showRegistrationForm()
     {
         // Página de registro
         return view('register');

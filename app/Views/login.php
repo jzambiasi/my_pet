@@ -6,7 +6,7 @@
     <title>Login</title>
 </head>
 <body>
-    <!-- Se houver mensagens de erro, exibi-las aqui -->
+    
     <?php if (isset($erro)) : ?>
         <div class="alert alert-danger">
             <?php echo $erro; ?>

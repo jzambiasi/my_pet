@@ -12,7 +12,7 @@
 
     <?php if (!session()->get('user_id')) : ?>
         <!-- Formulário de login -->
-        <form method="POST" action="<?= site_url('blog'); ?>">
+        <form method="POST" action="<?= site_url('/login'); ?>">
             <label for="email">Email:</label>
             <input type="text" name="email" id="email" required>
             <br>

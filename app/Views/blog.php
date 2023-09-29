@@ -14,7 +14,7 @@
     <?php endforeach; ?>
 
     <form action="criarpost.php" method="post">
-    <button type="submit">Enviar</button>
+    <button type="submit">Criar Post</button>
    
 
     <h3 style="font-size: 20px">
