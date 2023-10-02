@@ -84,4 +84,6 @@ class AuthController extends Controller
             return redirect()->to('/register');
         }
     }
+  
+    
 }

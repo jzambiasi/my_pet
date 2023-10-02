@@ -14,7 +14,7 @@
     <?php endif; ?>
 
     <h2>Login</h2>
-    <form action="/login" method="post">
+    <form action="login" method="post">
         <!-- Seu formulário de login aqui -->
     </form>
 </body>

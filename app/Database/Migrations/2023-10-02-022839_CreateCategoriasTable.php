@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreatePostsTable extends Migration
+class CreateCategoriasTable extends Migration
 {
     public function up()
     {
@@ -15,25 +15,22 @@ class CreatePostsTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'title' => [
+            'nome' => [
                 'type' => 'VARCHAR',
-                'constraint' => 255,
+                'constraint' => '255',
             ],
-            'content' => [
-                'type' => 'TEXT',
-            ],
-            'created_at' => [
-                'type' => 'TIMESTAMP',
-                'null' => true,
+            'tipo_post_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
             ],
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('posts');
+        $this->forge->createTable('categorias');
     }
 
     public function down()
     {
-        $this->forge->dropTable('posts');
+        $this->forge->dropTable('categorias');
     }
 }

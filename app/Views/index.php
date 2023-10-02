@@ -26,7 +26,7 @@
     <?php endif; ?>
 
     <?php foreach ($posts as $post) : ?>
-        <h2><a href="<?= site_url('home/viewPost/' . $post['id']); ?>"><?= $post['title']; ?></a></h2>
+        <h2><a href="<?= site_url('viewPost' . $post['id']); ?>"><?= $post['title']; ?></a></h2>
         <p><?= $post['content']; ?></p>
     <?php endforeach; ?>
 </body>

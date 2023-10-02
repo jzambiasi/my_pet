@@ -13,7 +13,7 @@
         </div>
     <?php endforeach; ?>
 
-    <form action="criarpost.php" method="post">
+    <form action="createpost.php" method="post">
     <button type="submit">Criar Post</button>
    
 
@@ -33,5 +33,6 @@
         você tem com seu animalzinho.
         </span>
     </h3>
+    
 </body>
 </html>
