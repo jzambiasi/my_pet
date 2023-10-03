@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Entities;
 
+use CodeIgniter\Entity\Entity;
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+class User extends Entity{}
 
 class UserAuthController extends BaseController
 {

@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Formulário de Criação de Post</h1>
-    <form method="post" action="<?= site_url('createpost.php'); ?>">
+    <form method="post" action="<?= site_url('criatepost/metodoCreatePost'); ?>">
         <div>
             <label for="title">Título:</label>
             <input type="text" name="title" id="title" required>
@@ -19,9 +19,11 @@
             <label for="categoria">Categoria:</label>
             <select name="categoria" id="categoria" required>
                 <option value="">Selecione a Categoria</option>
-                <?php foreach ($categorias as $categoria) : ?>
-                    <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
-                <?php endforeach; ?>
+                <option value="cachorro">Cachorro</option>
+                <option value="gato">Gato</option>
+                <option value="peixe">Peixe</option>
+                <option value="passaros">Pássaros</option>
+                <option value="diversos">Diversos</option>
             </select>
         </div>
         <div>

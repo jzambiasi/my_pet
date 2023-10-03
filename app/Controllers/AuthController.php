@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use App\Services\UserService; // Importe a classe UserService
 
 class AuthController extends Controller
 {
     private $userService;
 
-    public function __construct()
+    public function __construct(UserService $userService)
     {
-        // Injeção de dependência será feita automaticamente pelo CodeIgniter
-        $this->userService = service('user_service');
+        $this->userService = $userService;
     }
-
+  
     public function index()
     {
         // Página de login
@@ -30,18 +30,13 @@ class AuthController extends Controller
     {
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-
-        // Consulte o banco de dados para obter o usuário pelo email
-        $user = $this->userService->getUserByEmail($email);
-
-        if ($user && password_verify($password, $user->password)) {
-            // Credenciais corretas, redirecionar para a página principal
+        
+        if ($this->userService->authenticate($email, $password)) {
             $_SESSION['loggedin'] = true;
-            return redirect()->to('/blog'); // Redirecionar para a página principal
+            return redirect()->to('/dashboard');
         } else {
-            // Credenciais incorretas, exibir mensagem de erro
-            $erro = 'Usuário ou senha incorretos.';
-            return view('login', ['erro' => $erro]);
+            $error = 'Usuário ou senha incorretos.';
+            return view('login', ['error' => $error]);
         }
     }
 
@@ -49,41 +44,38 @@ class AuthController extends Controller
     {
         // Página de registro
         return view('register');
-    }
+    }         
 
     public function createUser()
     {
-        if ($this->request->getMethod() === 'post') {
-            $validation = \Config\Services::validation();
-
-            // Valide os dados do formulário
-            if ($validation->run($this->request->getPost(), 'register')) {
-                // Se a validação passar, continue com o processo de registro
-                $email = $this->request->getPost('email');
-                $password = $this->request->getPost('password');
-
-                // Chame o método createUser com os dois argumentos
-                $result = $this->userService->createUser($email, $password);
-
-                if ($result) {
-                    // Registro bem-sucedido, redirecionar para a página de login com mensagem de sucesso
-                    return redirect()->to('/login')->with('success', 'Usuário registrado com sucesso!');
-                } else {
-                    // Erro ao inserir no banco de dados, redirecionar para a página de registro com mensagem de erro
-                    return redirect()->to('/register')->with('error', 'Erro ao registrar usuário.');
-                }
-            } else {
-                // Dados do formulário não são válidos, crie uma mensagem de erro única
-                $errors = implode('<br>', $validation->getErrors());
-
-                // Redirecione para a página de registro com erros de validação
-                return redirect()->to('/register')->withInput()->with('errors', $errors);
-            }
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+    
+        // Verifique se o email já está em uso
+        $existingUser = $this->userService->getUserByEmail($email);
+    
+        if ($existingUser !== null) {
+            // O email já está em uso, retorne uma mensagem de erro
+            $error = 'O email já está em uso.';
+            return view('register', ['error' => $error]);
+        }
+    
+        // Crie o novo usuário
+        $result = $this->userService->createUser($email, $password);
+    
+        if ($result) {
+            // Registro bem-sucedido, redirecione para a página de login ou outra página desejada
+            return redirect()->to('/login')->with('success', 'Usuário criado com sucesso! Faça o login.');
         } else {
-            // Se não for uma solicitação POST, redirecione para a página de registro
-            return redirect()->to('/register');
+            // Erro ao criar o usuário, retorne uma mensagem de erro
+            $error = 'Erro ao criar o usuário. Tente novamente mais tarde.';
+            return view('register', ['error' => $error]);
         }
     }
-  
     
+
+    public function logout(){
+        session()->destroy();
+        return redirect()->to('/');
+    }
 }

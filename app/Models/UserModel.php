@@ -31,4 +31,5 @@ class UserModel extends Model
 
         return $this->insert($data);
     }
+    
 }

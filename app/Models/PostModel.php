@@ -21,10 +21,9 @@ class PostModel extends Model
     }
 
     public function createPost($data)
-{
-    return $this->save($data);
-}
-
+    {
+        return $this->save($data);
+    }
 
     public function updatePost($id, $data)
     {
