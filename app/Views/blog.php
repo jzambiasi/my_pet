@@ -13,7 +13,7 @@
         </div>
     <?php endforeach; ?>
 
-    <form action="criatepost/metodoCreatePost" method="post">
+    <form action="createpost/metodoCreatePost" method="post">
     <button type="submit">Criar Post</button>
    
 
