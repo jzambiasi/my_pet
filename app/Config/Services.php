@@ -1,8 +1,8 @@
 <?php
+
 namespace Config;
 
 use App\Services\UserService;
-use App\Models\UserModel;
 
 class Services extends \CodeIgniter\Config\Services
 {
@@ -12,7 +12,10 @@ class Services extends \CodeIgniter\Config\Services
             return static::getSharedInstance('userService');
         }
 
-        return new UserService(new UserModel());
+        return new UserService(new \App\Models\UserModel());
     }
+
+    public $aliases = [
+        'userService' => UserService::class,
+    ];
 }
-?>

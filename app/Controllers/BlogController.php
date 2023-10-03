@@ -18,7 +18,7 @@ class BlogController extends Controller
     public function createPost()
     {
         // Verifica se o formulário foi submetido via POST
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getPost() === 'post') {
             // Recupera os dados do formulário
             $postData = $this->request->getPost();
     

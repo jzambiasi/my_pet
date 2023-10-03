@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
     <title>Blog</title>
+ 
+
 </head>
+
 <body>
     <h1>Meu Blog</h1>
+    
 
     <?php foreach ($posts as $post): ?>
         <div class="post">

@@ -17,11 +17,17 @@ class UserModel extends Model
         'password' => 'required|min_length[6]',
     ];
 
+    // Método para acessar os erros de validação
+    public function getErrors()
+    {
+        return $this->errors();
+    }
+
     public function getUser($email)
     {
         return $this->where('email', $email)->first();
     }
-    
+
     public function createUser($email, $hashedPassword)
     {
         $data = [
@@ -31,5 +37,4 @@ class UserModel extends Model
 
         return $this->insert($data);
     }
-    
 }
