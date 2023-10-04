@@ -12,19 +12,15 @@ class AuthController extends BaseController {
         $user = $this->userService->getUserByEmail($email);
     
         if ($user && password_verify($password, $user->password)) {
-            // Credenciais corretas, redirecionar para a página principal
+            // Credenciais corretas, redirecionar para a página de login
             $_SESSION['loggedin'] = true;
-            return redirect()->to('/blog'); // Redirecionar para a página principal
+            return redirect()->to('login'); // Redirecionar para a página de login
         } else {
             // Credenciais incorretas, exibir mensagem de erro
             $erro = 'Usuário ou senha incorretos.';
             return view('login', ['erro' => $erro]);
         }
     }
+}
     
-
-        
-    }
-
-
 ?>
