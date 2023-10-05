@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html> 
-<head>
-    <title>Blog</title>
- 
-
-</head>
-
 <body>
-    <h1>Meu Blog</h1>
-    
+    <div>
+        <h1>Meu Blog</h1>
+    </div>  
 
-    <?php foreach ($posts as $post): ?>
-        <div class="post">
-            <h2><?php echo $post['title']; ?></h2>
-            <p><?php echo $post['content']; ?></p>
-        </div>
-    <?php endforeach; ?>
-
-    <form action="createpost/metodoCreatePost" method="post">
-    <button type="submit">Criar Post</button>
-   
+    <?php if (session()->get('user_id')) : ?>
+        <!-- Usuário logado -->
+        <p>Bem-vindo, <?= session()->get('user_name'); ?>!</p>
+       
+    <?php else : ?>
+        <a type="button" href="<?= site_url('/createpost'); ?>">Criar post</a>
+          
+       
+        
+    <?php endif; ?>
 
     <h3 style="font-size: 20px">
         <span>Ter um animal de estimação pode trazer inúmeros benefícios
@@ -37,6 +30,6 @@
         você tem com seu animalzinho.
         </span>
     </h3>
-    
+   
 </body>
 </html>

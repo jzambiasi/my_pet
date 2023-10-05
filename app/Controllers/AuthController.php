@@ -37,7 +37,7 @@ class AuthController extends Controller
 
         if ($this->userService->authenticate($email, $password)) {
             $_SESSION['loggedin'] = true;
-            return redirect()->to('/dashboard');
+            return redirect()->to('/blog');
         } else {
             $error = 'Usuário ou senha incorretos.';
             return view('login', ['error' => $error]);

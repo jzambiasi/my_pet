@@ -14,7 +14,7 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('register', 'AuthController::createUser');
     $routes->get('sair', 'AuthController::logout');
     $routes->get('dashboard', 'AdminController::dashboard');
-
+    $routes->get('blog', 'BlogController::index');
     // Rota para a página inicial do blog
     $routes->get('/', 'HomeController::index');
 
@@ -22,8 +22,8 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('viewPost/(:num)', 'HomeController::viewPost/$1');
 
     // Rota para a página de criação de postagens
-    $routes->get('createPost', 'BlogController::showCreatePostForm');
-    $routes->post('createPost', 'BlogController::createPost');
+    $routes->get('createpost', 'BlogController::showCreatePostForm');
+    $routes->post('createpost', 'BlogController::createPost');
 
     // Rota para o painel do administrador (com filtro de autenticação)
     $routes->get('painel', 'AdminController::dashboard', ['filter' => 'auth']);

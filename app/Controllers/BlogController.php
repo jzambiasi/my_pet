@@ -42,7 +42,6 @@ class BlogController extends Controller
             ]);
     
             if ($result) {
-                // Redirecione para a página de blog em vez de dashboard
                 return redirect()->to('/blog')->with('success', 'Postagem criada com sucesso.');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Erro ao criar a postagem.');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -199,4 +199,4 @@ input[type="email"] {
     </script>
 </body>
 
-</html>
+</html> -->

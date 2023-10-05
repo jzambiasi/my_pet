@@ -5,7 +5,7 @@
 
 <head>
     <title>Blog My Pet</title>
-    
+
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 
     <?php if (!session()->get('user_id')) : ?>
         <!-- Formulário de login -->
-        <form method="POST" action="<?= site_url('login'); ?>">
+        <form method="POST" action="<?= site_url('/login'); ?>">
             <label for="email">Email:</label>
             <input type="text" name="email" id="email" required>
             <br>
@@ -25,11 +25,7 @@
         <!-- Link para a página de registro -->
         <p>Não tem uma conta? <a href="<?= site_url('register'); ?>">Registre-se</a></p>
     <?php endif; ?>
-
-    <?php foreach ($posts as $post) : ?>
-        <h2><a href="<?= site_url('viewPost' . $post['id']); ?>"><?= $post['title']; ?></a></h2>
-        <p><?= $post['content']; ?></p>
-    <?php endforeach; ?>
+  
 </body>
 
 </html>

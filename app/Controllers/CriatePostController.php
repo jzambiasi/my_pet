@@ -9,7 +9,7 @@ class CriatePostController extends BaseController
     public function index()
     {
         // Lógica para exibir a página de criação de posts
-        return view('createpost'); // Corrija o nome da view aqui
+        return view('createpost'); 
     }
 
     public function metodoCreatePost()
@@ -36,10 +36,10 @@ class CriatePostController extends BaseController
             $postModel->createPost($data);
 
             // Redirecione para alguma página de sucesso ou exiba uma mensagem de sucesso
-            return redirect()->to('/posts')->with('success', 'Post criado com sucesso!');
+            return redirect()->to('createpost')->with('success', 'Postagem criada com sucesso.');
         }
 
         // Se a solicitação não for POST, redirecione para a página de criação de posts
-        return view('createpost'); // Corrija o nome da view aqui
+        return view('/createpost'); // Corrija o nome da view aqui
     }
 }
