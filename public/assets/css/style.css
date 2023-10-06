@@ -1,5 +1,5 @@
 /* Defina as variáveis de cores e fontes */
-:style {
+:root {
     --primeira-cor: #abdbf7;
     --segunda-cor: #717a82;
     --cor-fonte: rgba(0, 0, 0, .8);
@@ -75,3 +75,14 @@ body {
     border-radius: 4px;
     text-align: center;
 }
+
+.video-container {
+    display: flex;
+    text-align: left;
+}
+.video {
+    width: 100%; /* Faz o vídeo ocupar todo o espaço disponível */
+    display: block;
+    margin: 0;
+}
+
