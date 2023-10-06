@@ -1,0 +1,77 @@
+/* Defina as variáveis de cores e fontes */
+:root {
+    --primeira-cor: #abdbf7;
+    --segunda-cor: #717a82;
+    --cor-fonte: rgba(0, 0, 0, .8);
+    --familia-fonte: 'Montserrat', sans-serif;
+    --form-border-color: rgba(0, 0, 0, .1);
+}
+
+/* Estilos para o corpo da página */
+body {
+    align-items: center;
+    background: var(--primeira-cor);
+    color: var(--cor-fonte);
+    display: grid;
+    font-family: var(--familia-fonte);
+    font-size: 14px;
+    font-weight: 400;
+    height: 100vh;
+    justify-items: center;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para o container */
+.registro {
+    display: grid;
+    place-items: center;
+}
+
+/* Estilos para o formulário */
+.registro form {
+    text-align: center;
+}
+
+.registro label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registro input[type="email"],
+.registro input[type="password"] {
+    border: 1px solid var(--form-border-color);
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 5px;
+    width: 100%;
+}
+
+.registro button[type="submit"] {
+    background: var(--primeira-cor);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.registro button[type="submit"]:hover {
+    background: var(--segunda-cor);
+}
+
+/* Estilos para a mensagem de erro */
+.alert.alert-danger {
+    background: red;
+    color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+}

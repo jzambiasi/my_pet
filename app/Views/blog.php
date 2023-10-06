@@ -1,21 +1,34 @@
-<body>
-    <div>
-        <h1>Meu Blog</h1>
-    </div>  
+<?php if (session()->get('user_id')) : ?>
+    <!-- Usuário logado -->
+    <p>Bem-vindo, <?= session()->get('user_name'); ?>!</p>
 
-    <?php if (session()->get('user_id')) : ?>
-        <!-- Usuário logado -->
-        <p>Bem-vindo, <?= session()->get('user_name'); ?>!</p>
-       
-    <?php else : ?>
-        <a type="button" href="<?= site_url('/createpost'); ?>">Criar post</a>
-          
-       
-        
-    <?php endif; ?>
+<?php else : ?>
 
-    <h3 style="font-size: 20px">
-        <span>Ter um animal de estimação pode trazer inúmeros benefícios
+    <!DOCTYPE html> <!--  -->
+
+    <html>
+
+    <head>
+       <link rel="stylesheet" href="<?= base_url('../../../assets/css/style.css'); ?>">
+
+    </head>
+
+    <body>
+
+        <div>
+            <h1>Meu Blog</h1>
+            </head>
+        </div>
+
+
+        <a href="/createpost"><button>Criar post</button></a>
+
+    </body>
+
+<?php endif; ?>
+
+<h3 style="font-size: 20px">
+    <span>Ter um animal de estimação pode trazer inúmeros benefícios
         para a nossa vida. Além de nos proporcionarem companhia e alegria,
         os pets têm um impacto positivo em nossa saúde física, emocional e social.
         Vamos explorar a importância de ter um pet e como eles podem melhorar a nossa qualidade de vida.
@@ -28,8 +41,14 @@
         recompensadora e transformadora.
         Contribua também para aumentar as experiências que
         você tem com seu animalzinho.
-        </span>
-    </h3>
-   
+    </span>
+</h3>
+<video width="640" height="360" controls autoplay>
+    <source src="../assets/video/MY_PET_1.mp4" type="video/mp4">
+
+    .
+</video>
+
 </body>
-</html>
+
+    </html>
