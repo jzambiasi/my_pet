@@ -1,5 +1,5 @@
 /* Defina as variáveis de cores e fontes */
-:root {
+:style {
     --primeira-cor: #abdbf7;
     --segunda-cor: #717a82;
     --cor-fonte: rgba(0, 0, 0, .8);
@@ -25,23 +25,23 @@ body {
 }
 
 /* Estilos para o container */
-.registro {
+.register {
     display: grid;
     place-items: center;
 }
 
 /* Estilos para o formulário */
-.registro form {
+.register form {
     text-align: center;
 }
 
-.registro label {
+.register label {
     display: block;
     margin-bottom: 5px;
 }
 
-.registro input[type="email"],
-.registro input[type="password"] {
+.register input[type="email"],
+.register input[type="password"] {
     border: 1px solid var(--form-border-color);
     border-radius: 4px;
     height: 38px;
@@ -50,7 +50,7 @@ body {
     width: 100%;
 }
 
-.registro button[type="submit"] {
+.register button[type="submit"] {
     background: var(--primeira-cor);
     color: white;
     border: none;
@@ -62,7 +62,7 @@ body {
     transition: background 0.2s ease-in-out;
 }
 
-.registro button[type="submit"]:hover {
+.register button[type="submit"]:hover {
     background: var(--segunda-cor);
 }
 

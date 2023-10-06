@@ -43,11 +43,7 @@
         você tem com seu animalzinho.
     </span>
 </h3>
-<video width="640" height="360" controls autoplay>
-    <source src="../assets/video/MY_PET_1.mp4" type="video/mp4">
 
-    .
-</video>
 
 </body>
 

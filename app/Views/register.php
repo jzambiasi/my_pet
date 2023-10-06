@@ -23,5 +23,8 @@
         <input type="password" id="password" name="password" required><br>
         <input type="submit" value="Registrar">
     </form>
+    <video width="640" height="360" controls>
+    <source src="../../../assets/video/MY_PET_1.mp4" type="video/mp4">
+</video>
 </body>
 </html>
