@@ -24,44 +24,35 @@ class BlogController extends Controller
     public function createPost()
     {
         if ($this->request->getMethod() === 'post') {
-            $postData = $this->request->getPost();
-    
-            $validation = \Config\Services::validation();
-            $validation->setRules([
-                'title' => 'required',
+            // Valide os dados do formulário
+            $validationRules = [
+                'title' => 'required|min_length[5]|max_length[255]',
                 'content' => 'required',
-            ]);
-    
-            if (!$validation->withRequest($this->request)->run()) {
-                return redirect()->back()->withInput()->with('error', $validation->getErrors());
+            ];
+
+            if (!$this->validate($validationRules)) {
+                return redirect()->back()->withInput()->with('error', $this->validator->listErrors());
             }
-    
-            $result = $this->postModel->createPost([
+
+            // Recupere os dados do formulário
+            $postData = $this->request->getPost();
+
+            // Insira os dados no banco de dados usando o modelo PostModel
+            $post = [
                 'title' => $postData['title'],
                 'content' => $postData['content'],
-            ]);
-    
-            if ($result) {
-                return redirect()->to('/blog')->with('success', 'Postagem criada com sucesso.');
-            } else {
-                return redirect()->back()->withInput()->with('error', 'Erro ao criar a postagem.');
-            }
+            ];
+
+            $this->postModel->insert($post);
+
+            return redirect()->to('/blog')->with('success', 'Postagem criada com sucesso.');
         }
-    
+
         return $this->showCreatePostForm();
     }
-    
 
     public function showCreatePostForm()
     {
-        $categorias = [
-            ['id' => 1, 'nome' => 'Categoria 1'],
-            ['id' => 2, 'nome' => 'Categoria 2'],
-            // Adicione mais categorias conforme necessário
-        ];
-
-        return view('createpost', [
-            'categorias' => $categorias,
-        ]);
+        return view('createpost');
     }
 }

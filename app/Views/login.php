@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,7 +149,8 @@
             <h1>Login to continue</h1>
             <h2 class="errologin">
                 <?php if (session()->has('errologin')) : ?>
-                    <div><?= session()->getFlashdata('errologin') ?></div>
+                    <div><?= session()->getFlashdata('errologin') ?>
+                </div>
                 <?php endif; ?>
             </h2>
             <form action="/login" method="post">
@@ -189,4 +190,20 @@
         }
     </script>
 </body>
-</html>
+</html> -->
+<?php if (!session()->get('user_id')) : ?>
+            <!-- Formulário de login -->
+            <form method="POST" action="<?= site_url('/login'); ?>">
+            <div class= "inicio">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" required>
+                <br>
+                <label for="password">Senha:</label>
+                <input type="password" name="password" id="password" required>
+                <br>
+                <button type="submit">Entrar</button></div>
+            </form>
+            <!-- Link para a página de registro -->
+            <p>Não tem uma conta? <a href="<?= site_url('register'); ?>">Registre-se</a></p>
+        <?php endif; ?>
+    

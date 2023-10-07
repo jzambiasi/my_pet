@@ -9,19 +9,30 @@
     <html>
 
     <head>
-       <link rel="stylesheet" href="<?= base_url('../../../assets/css/style.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('../../../assets/css/style.css'); ?>">
 
     </head>
 
     <body>
+        <div class="navbar">
+            <a href="#">Blog</a>
+            <a href="#">Parceiros</a>
+            <a href="#">ONGs</a>
+            <a href="#">Pet Shops</a>
+            <a href="/createpost"><button>Criar post</button></a>
+            <a href="/login"><button type="button">Entrar</button></a>
+        </div>
 
-        <div>
+        <div class="blog">
             <h1>Meu Blog</h1>
             </head>
         </div>
 
-
-        <a href="/createpost"><button>Criar post</button></a>
+        <!-- Exiba os posts dos usuários aqui -->
+        <?php foreach ($posts as $post) : ?>
+            <h2><?= $post['title']; ?></h2>
+            <p><?= $post['content']; ?></p>
+        <?php endforeach; ?>
 
     </body>
 
@@ -41,6 +52,7 @@
         recompensadora e transformadora.
         Contribua também para aumentar as experiências que
         você tem com seu animalzinho.
+
     </span>
 </h3>
 

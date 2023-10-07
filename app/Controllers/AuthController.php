@@ -49,7 +49,17 @@ class AuthController extends Controller
         // Página de registro
         return view('register');
     }
+    public function showLoginForm()
+{
+    // Verifique se o usuário já está autenticado
+    if (session()->get('loggedin')) {
+        // Usuário já autenticado, redirecione para a página de boas-vindas
+        return redirect()->to('/bem-vindo');
+    }
 
+    // Se o usuário não estiver autenticado, exiba a página de formulário de login
+    return view('login');
+}
     public function createUser()
     {
         $postData = $this->request->getPost();
