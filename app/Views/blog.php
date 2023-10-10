@@ -1,32 +1,23 @@
-<?php if (session()->get('user_id')) : ?>
-    <!-- Usuário logado -->
-    <p>Bem-vindo, <?= session()->get('user_name'); ?>!</p>
+<!DOCTYPE html>
+<html>
 
-<?php else : ?>
+<head>
+    <link rel="stylesheet" href="<?= base_url('../../../assets/css/style.css'); ?>">
+</head>
 
-    <!DOCTYPE html> <!--  -->
+<body>
+    <div class="navbar">
+        <a href="#">Blog</a>
+        <a href="#">Parceiros</a>
+        <a href="#">ONGs</a>
+        <a href="/localizador_petshops">Pet Shops</a>
+        <a href="/createpost">Criar post</a>
+        <a href="<?= site_url('logout'); ?>">Logout</a>
+    </div>
 
-    <html>
-
-    <head>
-        <link rel="stylesheet" href="<?= base_url('../../../assets/css/style.css'); ?>">
-
-    </head>
-
-    <body>
-        <div class="navbar">
-            <a href="#">Blog</a>
-            <a href="#">Parceiros</a>
-            <a href="#">ONGs</a>
-            <a href="#">Pet Shops</a>
-            <a href="/createpost"><button>Criar post</button></a>
-            <a href="/login"><button type="button">Entrar</button></a>
-        </div>
-
-        <div class="blog">
-            <h1>Meu Blog</h1>
-            </head>
-        </div>
+    <div class="blog">
+        <h1>Meu Blog</h1>
+</div>
 
         <!-- Exiba os posts dos usuários aqui -->
         <?php foreach ($posts as $post) : ?>
@@ -35,8 +26,6 @@
         <?php endforeach; ?>
 
     </body>
-
-<?php endif; ?>
 
 <h3 style="font-size: 20px">
     <span>Ter um animal de estimação pode trazer inúmeros benefícios

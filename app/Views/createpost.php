@@ -29,6 +29,6 @@
         <div>
             <button type="submit">Criar Postagem</button>
         </div>
-    </form> <!-- Feche o elemento <form> aqui -->
+    </form> 
 </body>
 </html>
