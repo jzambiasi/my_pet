@@ -18,14 +18,13 @@ class AuthController extends Controller
     public function index()
     {
         $isLoggedIn = session()->get('loggedin');
-        
+
         // Carregar os posts do blog, se necessário
         // ...
-        
+
         // Passar a variável $isLoggedIn para a visualização
         return view('index', ['isLoggedIn' => $isLoggedIn]);
     }
-    
 
     public function register()
     {
@@ -92,7 +91,7 @@ class AuthController extends Controller
         if (session()->get('loggedin')) {
             // Recupere o email da sessão
             $userEmail = session()->get('user_email');
-            
+
             // Exiba a mensagem de boas-vindas com o email do usuário
             return 'Bem-vindo, ' . $userEmail;
         } else {
@@ -100,19 +99,17 @@ class AuthController extends Controller
             return 'Bem-vindo ao nosso blog!';
         }
     }
+
     public function createPost()
     {
-        // Verifique se o usuário está autenticado
-        if (!session()->get('loggedin')) {
-            // Se o usuário não estiver autenticado, redirecione para a página de login
-            return redirect()->to('/login');
-        }
-    
         // Coletar dados do formulário
         $title = $this->request->getPost('title');
         $content = $this->request->getPost('content');
         $category = $this->request->getPost('categoria');
-    
+
+        // Adicione a data/hora atual ao campo 'created_at'
+        $created_at = date('Y-m-d H:i:s');
+
         // Validar os dados usando as ferramentas de validação do CodeIgniter
         $validation = \Config\Services::validation();
         $validation->setRules([
@@ -120,21 +117,21 @@ class AuthController extends Controller
             'content' => 'required|min_length[10]',
             'categoria' => 'required',
         ]);
-    
+
         if (!$validation->withRequest($this->request)->run()) {
             // Se a validação falhar, redirecione de volta ao formulário de criação com mensagens de erro
             return redirect()->to('/createpost')->withInput()->with('errors', $validation->getErrors());
         }
-    
+
         // Criar o post
         $postModel = new \App\Models\PostModel();
         $postData = [
             'title' => $title,
             'content' => $content,
             'category' => $category,
-            // Outros campos, se houver
+            'created_at' => $created_at, // Adicione a data/hora atual
         ];
-    
+
         try {
             // Chame o método createPost do modelo
             if ($postModel->createPost($postData)) {
@@ -151,4 +148,19 @@ class AuthController extends Controller
             // return redirect()->to('/createpost')->withInput()->with('error', 'Ocorreu um erro ao criar o post: ' . $e->getMessage());
         }
     }
-}    
+    public function viewPost($postId)
+{
+    // Recupere a postagem completa com base no $postId
+    $postModel = new \App\Models\PostModel(); // Substitua com a lógica real
+    $post = $postModel->getPostById($postId);
+
+    if ($post) {
+        // Carregue a visualização com os dados da postagem completa
+        return view('viewpost', ['post' => $post]);
+    } else {
+        // Trate o caso em que a postagem não foi encontrada
+        // Pode ser uma boa prática exibir uma mensagem de erro ou redirecionar para a página de blog.
+    }
+}
+
+}

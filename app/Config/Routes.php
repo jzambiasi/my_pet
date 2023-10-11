@@ -39,7 +39,10 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     
     // Rota para a página de criar algo (ajuste conforme necessário)
     $routes->get('criar', 'AuthController::criar');
-    
+    $routes->get('blog/view/(:num)', 'AuthController::viewPost/$1');
+    $routes->get('post/(:num)', 'AuthController::viewPost/$1');
+    $routes->post('comment/addComment', 'CommentController::addComment');
+    $routes->get('comment/viewComments', 'CommentController::viewComments');
     // Rota para a página de usuários
     $routes->get('usuarios', 'Usuarios::index', ['as' => 'login']);
     $routes->get('usuarios/adicionar', 'Usuarios::adicionar');
