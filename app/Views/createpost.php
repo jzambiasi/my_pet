@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Formulário de Criação de Post</h1>
-    <form method="post" action="/createpost"> <!-- Adicione o elemento <form> aqui -->
+    <form method="post" action="createpost"> <!-- Adicione o elemento <form> aqui -->
         <div>
             <label for="title">Título:</label>
             <input type="text" name="title" id="title" required>

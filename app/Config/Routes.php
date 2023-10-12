@@ -15,7 +15,7 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('sair', 'AuthController::logout');
     $routes->get('dashboard', 'AdminController::dashboard');
     $routes->get('blog', 'BlogController::index');
-    
+    $routes->add('comment/addComment/(:num)', 'CommentController::addComment/$1');
     // Rota para a página inicial do blog
     $routes->get('/', 'HomeController::index');
     $routes->get('logout', 'AuthController::logout');
@@ -39,7 +39,10 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     
     // Rota para a página de criar algo (ajuste conforme necessário)
     $routes->get('criar', 'AuthController::criar');
-    
+    $routes->get('blog/view/(:num)', 'AuthController::viewPost/$1');
+    $routes->get('post/(:num)', 'AuthController::viewPost/$1');
+    $routes->get('comment/addComment/1', 'CommentController::addComment');
+    $routes->get('comment/viewComments', 'CommentController::viewComments');
     // Rota para a página de usuários
     $routes->get('usuarios', 'Usuarios::index', ['as' => 'login']);
     $routes->get('usuarios/adicionar', 'Usuarios::adicionar');

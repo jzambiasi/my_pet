@@ -23,7 +23,7 @@ class HomeController extends Controller
         // Lógica para buscar os detalhes de uma postagem específica no banco de dados
         $data = []; // Aqui você coloca os dados da postagem
 
-        return view('home/view_post', $data);
+        return view('home/viewpost', $data);
     }
 }
 
