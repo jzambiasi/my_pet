@@ -11,7 +11,7 @@ class PostController extends BaseController
 
         return view('post', ['post' => $post]);
     }
-<<<<<<< HEAD
+
 
     public function viewPost($postId)
     {
@@ -19,8 +19,6 @@ class PostController extends BaseController
         $postModel = new \App\Models\PostModel(); // Inicialize o modelo PostModel
         $post = $postModel->find($postId); // Recupera o post com base no ID
     
-        return view('view_post', ['post' => $post]);
+        return view('viewpost', ['post' => $post]);
     }
-=======
->>>>>>> 3eaab76671dd74846e82fca60e4c46a8c69bb0cf
 }

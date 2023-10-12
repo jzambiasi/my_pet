@@ -41,11 +41,11 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('criar', 'AuthController::criar');
     $routes->get('blog/view/(:num)', 'AuthController::viewPost/$1');
     $routes->get('post/(:num)', 'AuthController::viewPost/$1');
-<<<<<<< HEAD
+
     $routes->get('comment/addComment/1', 'CommentController::addComment');
-=======
+
     $routes->post('comment/addComment', 'CommentController::addComment');
->>>>>>> 3eaab76671dd74846e82fca60e4c46a8c69bb0cf
+    $routes->add('viewpost/(:num)', 'PostController::viewPost/$1');
     $routes->get('comment/viewComments', 'CommentController::viewComments');
     // Rota para a página de usuários
     $routes->get('usuarios', 'Usuarios::index', ['as' => 'login']);
