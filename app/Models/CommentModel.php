@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 namespace App\Models;
@@ -26,3 +27,35 @@ class CommentModel extends Model
         return $this->where('post_id', $postID)->findAll(); // Consulta os comentários relacionados à postagem
     }
 }
+=======
+<?php
+
+namespace App\Models;
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
+use App\Models\CommentModel; // Importe a classe CommentModel
+
+class CommentController extends Controller
+{
+    protected $commentModel; // Defina a propriedade $commentModel
+
+    public function __construct()
+    {
+        // Obtenha as dependências usando o Service Container
+        $this->commentModel = new CommentModel(); // Inicialize o modelo CommentModel
+    }
+
+    public function addComment()
+    {
+        // Lógica para adicionar um comentário
+    }
+
+    public function viewComments()
+    {
+        // Lógica para exibir os comentários
+    }
+}
+
+?>
+>>>>>>> 3eaab76671dd74846e82fca60e4c46a8c69bb0cf

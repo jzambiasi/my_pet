@@ -11,6 +11,7 @@ class PostController extends BaseController
 
         return view('post', ['post' => $post]);
     }
+<<<<<<< HEAD
 
     public function viewPost($postId)
     {
@@ -20,4 +21,6 @@ class PostController extends BaseController
     
         return view('view_post', ['post' => $post]);
     }
+=======
+>>>>>>> 3eaab76671dd74846e82fca60e4c46a8c69bb0cf
 }

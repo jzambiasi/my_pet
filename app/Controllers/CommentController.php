@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 namespace App\Controllers;
@@ -45,3 +46,31 @@ class CommentController extends Controller
         // Lógica para exibir os comentários
     }
 }
+=======
+<?php
+
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
+use App\Models\CommentModel;
+
+class CommentController extends Controller
+{
+    public function __construct()
+    {
+        // Carregue o modelo de comentários
+        $this->commentModel = new CommentModel();
+    }
+
+    public function addComment()
+    {
+        // Lógica para adicionar um comentário
+    }
+
+    public function viewComments($postId)
+    {
+        // Lógica para visualizar os comentários associados à postagem
+    }
+}
+?>
+>>>>>>> 3eaab76671dd74846e82fca60e4c46a8c69bb0cf
