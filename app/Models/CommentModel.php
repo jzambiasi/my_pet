@@ -6,23 +6,22 @@ use CodeIgniter\Model;
 
 class CommentModel extends Model
 {
-    protected $table = 'comments'; // Nome da tabela de comentários
-    protected $primaryKey = 'id'; // Chave primária da tabela
-    protected $allowedFields = ['post_id', 'content'];
+    protected $table = 'comments';
+    protected $primaryKey = 'id';
+    protected $allowedFields = ['post_id', 'content']; // Alterado 'comment' para 'content'
 
     public function addComment($postID, $commentText)
     {
         $data = [
             'post_id' => $postID,
-            'comment' => $commentText,
+            'content' => $commentText, // Alterado 'comment' para 'content'
         ];
 
-        return $this->insert($data); // Insere o comentário no banco de dados e retorna o resultado
+        return $this->insert($data);
     }
 
     public function viewComments($postID)
     {
-        // Lógica para exibir os comentários de uma postagem específica
-        return $this->where('post_id', $postID)->findAll(); // Consulta os comentários relacionados à postagem
+        return $this->where('post_id', $postID)->findAll();
     }
 }

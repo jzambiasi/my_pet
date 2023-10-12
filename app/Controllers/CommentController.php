@@ -15,27 +15,28 @@ class CommentController extends Controller
     }
 
     public function addComment()
-    {
-        if ($this->request->getMethod() === 'post') {
-            $postID = $this->request->getPost('post_id');
-            $commentText = $this->request->getPost('comment');
+{
+    if ($this->request->getMethod() === 'post') {
+        $postID = $this->request->getPost('post_id');
+        $commentText = $this->request->getPost('content'); // Alterado para 'content'
 
-            // Valide os dados, se necessário
+        // Valide os dados, se necessário
 
-            // Crie um array com os dados do comentário
-            $commentData = [
-                'post_id' => $postID,
-                'comment' => $commentText,
-                // Outros campos, se houver
-            ];
+        // Crie um array com os dados do comentário
+        $commentData = [
+            'post_id' => $postID,
+            'content' => $commentText, // Alterado para 'content'
+            // Outros campos, se houver
+        ];
 
-            // Insira o comentário no banco de dados
-            $this->commentModel->insert($commentData);
+        // Insira o comentário no banco de dados
+        $this->commentModel->insert($commentData);
 
-            // Redirecione de volta à página de visualização da postagem ou faça qualquer outra ação necessária
-            return redirect()->to(site_url('viewpost/' . $postID));
-        }
+        // Redirecione de volta à página de visualização da postagem ou faça qualquer outra ação necessária
+        return redirect()->to(site_url('viewpost/' . $postID));
     }
+}
+    
 
     public function viewComments($postId)
     {
