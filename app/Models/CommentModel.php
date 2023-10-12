@@ -8,13 +8,13 @@ class CommentModel extends Model
 {
     protected $table = 'comments';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['post_id', 'content']; // Alterado 'comment' para 'content'
+    protected $allowedFields = ['post_id', 'content'];
 
     public function addComment($postID, $commentText)
     {
         $data = [
             'post_id' => $postID,
-            'content' => $commentText, // Alterado 'comment' para 'content'
+            'content' => $commentText,
         ];
 
         return $this->insert($data);

@@ -2,16 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Models\CommentModel;
 use App\Models\PostModel;
 use CodeIgniter\Controller;
 
 class BlogController extends Controller
 {
     private $postModel;
+    private $commentModel;
 
     public function __construct()
     {
         $this->postModel = new PostModel();
+        $this->commentModel = new CommentModel();
     }
 
     public function index()
@@ -35,7 +38,7 @@ class BlogController extends Controller
             }
 
             // Recupere os dados do formulário
-            $postData = $this->request->getPost();
+            $postData = $this->request->getVar();
 
             // Insira os dados no banco de dados usando o modelo PostModel
             $post = [
@@ -54,5 +57,29 @@ class BlogController extends Controller
     public function showCreatePostForm()
     {
         return view('createpost');
+    }
+
+    public function view($postID)
+    {
+        // Recupere os detalhes da postagem com base no ID
+        $post = $this->postModel->find($postID);
+    
+        if ($post) {
+            // Recupere os comentários associados a esta postagem
+            $comments = $this->commentModel->where('post_id', $postID)->findAll();
+    
+            // Se a postagem existe, carregue a visualização e passe os dados da postagem e os comentários para ela
+            return view('viewpost', ['post' => $post, 'comments' => $comments]);
+        } else {
+            // Se a postagem não existe, você pode redirecionar para uma página de erro ou fazer o que for apropriado.
+            return redirect()->to('/blog')->with('error', 'A postagem não foi encontrada.');
+        }
+    }
+
+    public function viewByCategory($category)
+    {
+        $posts = $this->postModel->findByCategory($category);
+
+        return view('category', ['category' => $category, 'posts' => $posts]);
     }
 }

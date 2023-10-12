@@ -20,8 +20,7 @@
     </div>
 
     <div class="post">
-        <h2>Título da Postagem</h2>
-        <p>
+         <p>
             Ter um animal de estimação pode trazer inúmeros benefícios
             para a nossa vida. Além de nos proporcionarem companhia e alegria,
             os pets têm um impacto positivo em nossa saúde física, emocional e social.
@@ -45,7 +44,7 @@
         <h2><?= $post['title']; ?></h2>
         <p><?= substr($post['content'], 0, 50); ?>...</p>
         
-        <a href="<?= site_url('blog/view/' . $post['id']); ?>">Leia mais</a>
+        <a href="<?= site_url('blog/viewpost/' . $post['id']); ?>">Leia mais</a>
     </div>
     <?php endforeach; ?>
 

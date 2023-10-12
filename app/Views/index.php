@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -20,11 +21,7 @@
         <h1>Meu Blog</h1>
     </div>
 
-    <!-- Exiba os posts dos usuários aqui -->
-    <?php foreach ($posts as $post) : ?>
-        <h2><?= $post['title']; ?></h2>
-        <p><?= $post['content']; ?></p>
-    <?php endforeach; ?>
+  
 
     <h3 style="font-size: 20px">
         <span>Ter um animal de estimação pode trazer inúmeros benefícios
@@ -42,7 +39,11 @@
             você tem com seu animalzinho.
         </span>
     </h3>
-
+  <!-- Exiba os posts dos usuários aqui -->
+  <?php foreach ($posts as $post) : ?>
+        <h2><?= $post['title']; ?></h2>
+        <p><?= $post['content']; ?></p>
+    <?php endforeach; ?>
 </body>
 
 </html>
