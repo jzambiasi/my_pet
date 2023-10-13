@@ -33,7 +33,6 @@ class CreateCommentsTable extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-
         $this->forge->createTable('comments');
     }
 

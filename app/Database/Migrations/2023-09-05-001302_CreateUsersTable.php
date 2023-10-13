@@ -29,12 +29,11 @@ class CreateUsersTable extends Migration
             ],
             'deleted_at' => [
                 'type' => 'datetime',
-                'null' => true, // A coluna pode ser nula
+                'null' => true,
             ],
         ]);
 
         $this->forge->addKey('id', true);
-
         $this->forge->createTable('users');
     }
 

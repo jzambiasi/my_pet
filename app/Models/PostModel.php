@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -33,5 +32,27 @@ class PostModel extends Model
     public function deletePost($id)
     {
         return $this->delete($id);
+    }
+
+    public function getAllCategories()
+    {
+        // Substitua 'categorias' pelo nome da sua tabela de categorias
+        $query = $this->db->table('categorias')
+            ->select('nome')
+            ->distinct()
+            ->get();
+
+        return $query->getResultArray();
+    }
+    // Dentro do arquivo PostModel.php
+
+    public function findByCategory($category)
+    {
+        // Use o Query Builder para consultar os posts com base na categoria
+        return $this->select('*')
+        ->join('categorias', 'categorias.id = tipo_post_id')
+        ->where('categorias.nome', $category)
+        ->findAll();
+
     }
 }

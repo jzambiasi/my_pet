@@ -22,10 +22,12 @@ class CreateCategoriasTable extends Migration
             'tipo_post_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
+                'unsigned' => true,
             ],
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('tipo_post_id', 'posts', 'id');
         $this->forge->createTable('categorias');
     }
 

@@ -19,7 +19,18 @@ class BlogController extends Controller
 
     public function index()
     {
-        $data['posts'] = $this->postModel->findAll();
+        $category = $this->request->getGet('category'); // Obtém a categoria da consulta GET
+
+        if ($category && $category !== 'all') {
+            $posts = $this->postModel->findByCategory($category);
+        } else {
+            $posts = $this->postModel->findAll();
+        }
+
+        $data = [
+            'posts' => $posts,
+            'selectedCategory' => $category,
+        ];
 
         return view('blog', $data);
     }
@@ -56,18 +67,19 @@ class BlogController extends Controller
 
     public function showCreatePostForm()
     {
-        return view('createpost');
+        $data['categories'] = $this->postModel->getAllCategories();
+        return view('createpost', $data);
     }
 
     public function view($postID)
     {
         // Recupere os detalhes da postagem com base no ID
         $post = $this->postModel->find($postID);
-    
+
         if ($post) {
             // Recupere os comentários associados a esta postagem
             $comments = $this->commentModel->where('post_id', $postID)->findAll();
-    
+
             // Se a postagem existe, carregue a visualização e passe os dados da postagem e os comentários para ela
             return view('viewpost', ['post' => $post, 'comments' => $comments]);
         } else {
@@ -78,8 +90,16 @@ class BlogController extends Controller
 
     public function viewByCategory($category)
     {
-        $posts = $this->postModel->findByCategory($category);
+        $data['categories'] = $this->postModel->getAllCategories();
 
-        return view('category', ['category' => $category, 'posts' => $posts]);
+        if ($category === 'all') {
+            // Se 'all' for selecionado, carregue todos os posts
+            $data['posts'] = $this->postModel->findAll();
+        } else {
+            // Caso contrário, filtre os posts pela categoria selecionada
+            $data['posts'] = $this->postModel->findByCategory($category);
+        }
+
+        return view('blog', $data);
     }
 }

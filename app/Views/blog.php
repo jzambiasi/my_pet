@@ -35,19 +35,32 @@
             Contribua também para aumentar as experiências que
             você tem com seu animalzinho.
         </p>
-       
     </div>
 
-    <!-- Exiba os posts dos usuários aqui -->
-    <?php foreach ($posts as $post) : ?>
-        <div class="post">
-        <h2><?= $post['title']; ?></h2>
-        <p><?= substr($post['content'], 0, 50); ?>...</p>
-        
-        <a href="<?= site_url('blog/viewpost/' . $post['id']); ?>">Leia mais</a>
-    </div>
-    <?php endforeach; ?>
+    <form action="<?= site_url('blog') ?>" method="get">
+    <label for="category">Categoria:</label>
+    <select id="category" name="category">
+        <option value="all" <?= $selectedCategory === 'all' ? 'selected' : '' ?>>Todos</option>
+        <option value="Cachorro" <?= $selectedCategory === 'Cachorro' ? 'selected' : '' ?>>Cachorro</option>
+        <option value="Gato" <?= $selectedCategory === 'Gato' ? 'selected' : '' ?>>Gato</option>
+        <option value="Pássaros" <?= $selectedCategory === 'Pássaros' ? 'selected' : '' ?>>Pássaros</option>
+        <option value="Peixes" <?= $selectedCategory === 'Peixes' ? 'selected' : '' ?>>Peixes</option>
+        <option value="Diversos" <?= $selectedCategory === 'Diversos' ? 'selected' : '' ?>>Diversos</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+</div>
 
+
+    <div class="post-list">
+        <?php foreach ($posts as $post) : ?>
+            <div class="post">
+                <h2><?= $post['title']; ?></h2>
+                <p><?= substr($post['content'], 0, 50); ?>...</p>
+                <a href="<?= site_url('blog/viewpost/' . $post['id']); ?>">Leia mais</a>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </body>
 
 </html>
