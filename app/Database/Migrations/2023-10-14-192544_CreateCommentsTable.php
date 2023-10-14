@@ -25,14 +25,18 @@ class CreateCommentsTable extends Migration
             'user_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
+                'unsigned' => true,
             ],
             'post_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
+                'unsigned' => true,
             ],
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('user_id', 'users', 'id');
+        $this->forge->addForeignKey('post_id', 'posts', 'id');
         $this->forge->createTable('comments');
     }
 

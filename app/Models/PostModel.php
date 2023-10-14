@@ -1,13 +1,14 @@
 <?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
 class PostModel extends Model
 {
-    protected $table = 'posts'; // Nome da tabela no banco de dados
-    protected $primaryKey = 'id'; // Nome da chave primária
-    protected $allowedFields = ['title', 'content']; // Campos permitidos para inserção/atualização
+    protected $table = 'posts';
+    protected $primaryKey = 'id';
+    protected $allowedFields = ['title', 'content'];
 
     public function getAllPosts()
     {
@@ -36,7 +37,6 @@ class PostModel extends Model
 
     public function getAllCategories()
     {
-        // Substitua 'categorias' pelo nome da sua tabela de categorias
         $query = $this->db->table('categorias')
             ->select('nome')
             ->distinct()
@@ -44,15 +44,12 @@ class PostModel extends Model
 
         return $query->getResultArray();
     }
-    // Dentro do arquivo PostModel.php
 
     public function findByCategory($category)
     {
-        // Use o Query Builder para consultar os posts com base na categoria
         return $this->select('*')
-        ->join('categorias', 'categorias.id = tipo_post_id')
-        ->where('categorias.nome', $category)
-        ->findAll();
-
+            ->join('categorias', 'categorias.id = posts.tipo_post_id')
+            ->where('categorias.nome', $category)
+            ->findAll();
     }
 }

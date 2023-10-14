@@ -7,6 +7,6 @@ class CategoriaModel extends Model
 {
     protected $table = 'categorias';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nome', 'tipo_post_id'];
+    protected $allowedFields = ['nome'];
 }
 ?>

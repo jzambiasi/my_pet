@@ -17,17 +17,11 @@ class CreateCategoriasTable extends Migration
             ],
             'nome' => [
                 'type' => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'tipo_post_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
+                'constraint' => 255,
             ],
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('tipo_post_id', 'posts', 'id');
         $this->forge->createTable('categorias');
     }
 
@@ -36,3 +30,4 @@ class CreateCategoriasTable extends Migration
         $this->forge->dropTable('categorias');
     }
 }
+

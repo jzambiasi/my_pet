@@ -22,13 +22,15 @@ class CreatePostsTable extends Migration
             'content' => [
                 'type' => 'TEXT',
             ],
-            'created_at' => [
-                'type' => 'TIMESTAMP',
-                'null' => true,
+            'tipo_post_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
             ],
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('tipo_post_id', 'categorias', 'id');
         $this->forge->createTable('posts');
     }
 

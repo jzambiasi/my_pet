@@ -8,7 +8,8 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('logout', 'AuthController::logout');
     $routes->get('blog/viewpost/(:num)', 'BlogController::view/$1');
     $routes->post('comment/addComment', 'CommentController::addComment');
-
+    $routes->get('blog/filterByCategory', 'BlogController::filterByCategory');
+    
 
     // Rota para o painel do administrador
     $routes->get('dashboard', 'AdminController::dashboard');

@@ -102,4 +102,21 @@ class BlogController extends Controller
 
         return view('blog', $data);
     }
+   public function filterByCategory()
+    {
+        $category = $this->request->getGet('category');
+        echo "Categoria selecionada: " . $category;
+    if ($category && $category !== 'all') {
+        $posts = $this->postModel->findByCategory($category);
+    } else {
+        $posts = $this->postModel->findAll();
+    }
+
+    $data = [
+        'posts' => $posts,
+        'selectedCategory' => $category,
+    ];
+
+    return view('blog', $data);
+}
 }
