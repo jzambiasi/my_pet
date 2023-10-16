@@ -24,12 +24,10 @@ class CreateUsersTable extends Migration
                 'constraint' => 255,
             ],
             'created_at' => [
-                'type' => 'timestamp',
-                'null' => null,
+                'type' => 'datetime',
             ],
             'deleted_at' => [
                 'type' => 'datetime',
-                'null' => true,
             ],
         ]);
 
@@ -42,4 +40,3 @@ class CreateUsersTable extends Migration
         $this->forge->dropTable('users');
     }
 }
-

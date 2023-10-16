@@ -30,4 +30,3 @@ class CreateCategoriasTable extends Migration
         $this->forge->dropTable('categorias');
     }
 }
-

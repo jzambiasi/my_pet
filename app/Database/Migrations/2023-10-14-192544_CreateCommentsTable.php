@@ -19,8 +19,7 @@ class CreateCommentsTable extends Migration
                 'type' => 'TEXT',
             ],
             'created_at' => [
-                'type' => 'timestamp',
-                'null' => true,
+                'type' => 'datetime',
             ],
             'user_id' => [
                 'type' => 'INT',
