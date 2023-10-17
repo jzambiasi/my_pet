@@ -13,14 +13,14 @@ class PostController extends BaseController
         // Coletar dados do formulário
         $title = $this->request->getPost('title');
         $content = $this->request->getPost('content');
-        $category_id = $this->request->getPost('category_id'); // Alterei a variável para 'category_id'
-
+        $tipo_post_id = $this->request->getPost('tipo_post_id');
+debug($this->request->getPost());
         // Validar os dados usando as ferramentas de validação do CodeIgniter
         $validation = \Config\Services::validation();
         $validation->setRules([
             'title' => 'required|min_length[5]',
             'content' => 'required|min_length[10]',
-            'category_id' => 'required', // Certifique-se de que a categoria seja fornecida no formulário
+            'tipo_post_id' => 'required',
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -33,7 +33,7 @@ class PostController extends BaseController
         $postData = [
             'title' => $title,
             'content' => $content,
-            'tipo_post_id' => $category_id, // Aqui associamos a postagem à categoria
+            'tipo_post_id' => $tipo_post_id,
         ];
 
         // Chame o método createPost do modelo

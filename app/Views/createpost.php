@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Formulário de Criação de Post</h1>
-    <form method="post" action="createpost">
+    <form method="post" action="/createpost">
         <div>
             <label for="title">Título:</label>
             <input type="text" name="title" id="title" required>
@@ -16,14 +16,14 @@
             <textarea name="content" id="content" rows="5" required></textarea>
         </div>
         <div>
-            <label for="categoria">Categoria:</label>
-            <select name="categoria" id="categoria" required>
+            <label for="tipo_post_id">Categoria:</label>
+            <select name="tipo_post_id" id="tipo_post_id" required>
                 <option value="">Selecione a Categoria</option>
-                <option value="cachorro">Cachorro</option>
-                <option value="gato">Gato</option>
-                <option value="peixe">Peixe</option>
-                <option value="passaros">Pássaros</option>
-                <option value="diversos">Diversos</option>
+                <option value="1">Cachorro</option>
+                <option value="2">Gato</option>
+                <option value="3">Peixe</option>
+                <option value="4">Pássaros</option>
+                <option value="5">Diversos</option>
             </select>
         </div>
         <div>

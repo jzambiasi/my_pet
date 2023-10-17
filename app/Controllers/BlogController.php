@@ -48,16 +48,7 @@ class BlogController extends Controller
                 return redirect()->back()->withInput()->with('error', $this->validator->listErrors());
             }
 
-            // Recupere os dados do formulário
-            $postData = $this->request->getVar();
-
-            // Insira os dados no banco de dados usando o modelo PostModel
-            $post = [
-                'title' => $postData['title'],
-                'content' => $postData['content'],
-            ];
-
-            $this->postModel->insert($post);
+            $this->postModel->insert($this->request->getPost());
 
             return redirect()->to('/blog')->with('success', 'Postagem criada com sucesso.');
         }
@@ -102,21 +93,22 @@ class BlogController extends Controller
 
         return view('blog', $data);
     }
-   public function filterByCategory()
+    public function filterByCategory()
     {
-        $category = $this->request->getGet('category');
-        echo "Categoria selecionada: " . $category;
-    if ($category && $category !== 'all') {
-        $posts = $this->postModel->findByCategory($category);
-    } else {
-        $posts = $this->postModel->findAll();
+        $category = $this->request->getGet('categoria'); // Obtém a categoria da consulta GET
+    
+        if ($category && $category !== 'all') {
+            $posts = $this->postModel->findByCategory($category);
+        } else {
+            $posts = $this->postModel->findAll();
+        }
+    
+        $data = [
+            'posts' => $posts,
+            'selectedCategory' => $category,
+        ];
+    
+        return view('blog', $data);
     }
-
-    $data = [
-        'posts' => $posts,
-        'selectedCategory' => $category,
-    ];
-
-    return view('blog', $data);
-}
+    
 }

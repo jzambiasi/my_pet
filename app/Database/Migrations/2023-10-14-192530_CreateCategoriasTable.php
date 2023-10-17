@@ -23,10 +23,20 @@ class CreateCategoriasTable extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->createTable('categorias');
-    }
 
+        // Inserir dados iniciais na tabela de categorias
+        $data = [
+            ['nome' => 'Cachorro'],
+            ['nome' => 'Gato'],
+            ['nome' => 'Peixe'],
+            ['nome' => 'Pássaros'],
+            ['nome' => 'Diversos'],
+        ];
+        
+        $this->db->table('categorias')->insertBatch($data);
+    }
     public function down()
-    {
+     {
         $this->forge->dropTable('categorias');
     }
 }

@@ -8,7 +8,7 @@ class PostModel extends Model
 {
     protected $table = 'posts';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['title', 'content'];
+    protected $allowedFields = ['title', 'content', 'tipo_post_id'];
 
     public function getAllPosts()
     {
@@ -22,7 +22,7 @@ class PostModel extends Model
 
     public function createPost($data)
     {
-        return $this->save($data);
+        return $this->insert($data);
     }
 
     public function updatePost($id, $data)
@@ -38,7 +38,7 @@ class PostModel extends Model
     public function getAllCategories()
     {
         $query = $this->db->table('categorias')
-            ->select('nome')
+            ->select('id, nome') // Selecionar 'id' também para associar corretamente com 'tipo_post_id'
             ->distinct()
             ->get();
 
