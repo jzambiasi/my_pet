@@ -29,6 +29,7 @@ class Usuarios extends BaseController
     public function index()
     {
         return view('user_login');
+        // Teste jaguara
     }
 
     public function adicionar()
