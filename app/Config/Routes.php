@@ -9,7 +9,9 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('blog/viewpost/(:num)', 'BlogController::view/$1');
     $routes->post('addComment', 'CommentController::addComment');
     $routes->get('blog/filterByCategory', 'BlogController::filterByCategory');
-    
+    $routes->get('bem-vindo', 'AuthController::BemVindo');
+
+
 
 
     // Rota para o painel do administrador
