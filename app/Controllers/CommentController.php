@@ -2,47 +2,36 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
 use CodeIgniter\Controller;
 use App\Models\CommentModel;
+use App\Services\CommentService;
 
 class CommentController extends Controller
 {
-    protected $commentModel;
+    protected $commentService;
     protected $userModel;
 
     public function __construct()
     {
-        $this->commentModel = new CommentModel();
-        $this->userModel = new UserModel(); // Substitua "UserModel" pelo nome da sua classe de modelo de usuário.
+        $this->commentService = new CommentService();
+        $this->userModel = new UserModel();
     }
 
     public function addComment()
     {
-        if ($this->request->getMethod() === 'post') {
-            $postID = $this->request->getPost('post_id');
-            $commentText = $this->request->getPost('content');
-            $userID = $this->request->getPost('user_id'); // Supondo que você tenha um campo "user_id" no seu formulário.
 
-            // Valide os dados, se necessário
+        $validation = \Config\Services::validation();
 
-            // Verifique se o usuário com o ID especificado existe
-            if (!$this->userModel->find($userID)) {
-                return redirect()->to(site_url('blog/viewpost/' . $postID))->with('error', 'Usuário não encontrado.');
-            }
+        $validation->setRules([
+            'content' => 'required'
+        ]);
 
-            // Crie um array com os dados do comentário
-            $commentData = [
-                'post_id' => $postID,
-                'content' => $commentText,
-                'user_id' => $userID,
-                // Outros campos, se houver
-            ];
-
-            // Insira o comentário no banco de dados
-            $this->commentModel->insert($commentData);
-
-            // Redirecione de volta à página de visualização da postagem
-            return redirect()->to(site_url('blog/viewpost/' . $postID))->with('success', 'Comentário adicionado com sucesso.');
+        if ($this->commentService->createComment($this->request->getPost())) {
+            session()->setFlashdata('success', 'Comentário gravado com sucesso');
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
     }
 

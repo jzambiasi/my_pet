@@ -37,8 +37,15 @@ class AuthController extends Controller
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        if ($this->userService->authenticate($email, $password)) {
-            $_SESSION['loggedin'] = true;
+        if ($userFind = $this->userService->authenticate($email, $password)) {
+
+            $arrauUser = array(
+                'user_id' => $userFind->id,
+                'email' => $userFind->email,
+                'loggedin' => true,
+            );
+
+            session()->set($arrauUser);
             return redirect()->to('/blog');
         } else {
             $data['error'] = 'Usuário ou senha incorretos.';
