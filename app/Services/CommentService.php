@@ -25,13 +25,25 @@ class CommentService
         }
     }
 
-    public function selfDelete($id)
+    public function readComment($id)
     {
-        if ($this->commentModel->delete($id)) {
+        return $this->commentModel->find($id);
+    }
+
+    public function updateComment($id, $commentData)
+    {
+        $comment = new Comment($commentData);
+
+        if ($this->commentModel->update($id, $comment)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function deleteComment($id)
+    {
+        return $this->commentModel->delete($id);
     }
 
     // Novo método para buscar um usuário pelo email
